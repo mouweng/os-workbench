@@ -113,7 +113,7 @@ int main(){
         if(str[0]>='0'&&str[0]<='9')
             count++;
     }
-    printf("进程数:%d\n",count);
+    printf("进程数:%d\n",1);
     // info file[1024];
     // i=0;t=0;
     // while(i<total)
