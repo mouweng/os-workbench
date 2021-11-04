@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
   } else if (strcmp(argv[1], "-p") == 0 || strcmp(argv[1], "--show-pids") == 0) {
     printf("show-pids\n");
   } else {
-    printf("There Is No Such Argument Named %s\n", argv[1]);
+    printf("There Is No Such Argument Named \"%s\"\n", argv[1]);
   }
   return 0;
 }
