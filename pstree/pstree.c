@@ -102,7 +102,7 @@ void print_pstree(info *file,int count,int ppid,int rec){
     }
 }
 int main(){
-    int i,j,k,total,s1,s2,count,t;
+    int i,j,k,total,s1,s2,count = 0,t;
     char str[1024],dir[1024];
     struct dirent **namelist;
     strcpy(dir,default_path);
