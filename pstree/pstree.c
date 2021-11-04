@@ -7,6 +7,6 @@ int main(int argc, char *argv[]) {
     printf("argv[%d] = %s\n", i, argv[i]);
   }
   assert(!argv[argc]);
-  printf(argc);
+  printf("argc = %d\n", argc);
   return 0;
 }
