@@ -9,6 +9,8 @@
 #include <dirent.h>
 
 char default_path[1024] = "/proc/";
+int flag1 = 0, flag2 = 0, flag3 = 0;
+
 
 typedef struct file_info{
     int pid;
@@ -63,7 +65,10 @@ void print_pstree(info *file,int count,int ppid,int rec){
             file[i].flag=1;
             for(k=0;k<rec;k++)
                 printf("      ");
-            printf("[%d]%s\n",file[i].pid,file[i].name);
+            if (flag1 == 1)
+                printf("[%d]%s\n",file[i].pid,file[i].name);
+            else
+                printf("%s\n",file[i].name);
             print_pstree(file,count,file[i].pid,file[i].rec);
         }
     }
@@ -86,6 +91,20 @@ void quickSort(info *file, int l, int r) {
 }
 
 int main(int argc, char *argv[]) {
+    for (int i = 0; i < argc; i++) {
+        assert(argv[i]); // C 标准保证
+        if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--show-pids") == 0) flag1 = 1;
+        if (strcmp(argv[i], "-n") == 0 || strcmp(argv[i], "--numeric-sort") == 0) flag2 = 1;
+        if (strcmp(argv[i], "-V") == 0 || strcmp(argv[i], "--version") == 0) flag3 = 1;
+    }
+    assert(!argv[argc]); // C 标准保证
+
+    if (flag3 == 1) {
+        printf("Version 1.1");
+        return 0;
+    }
+
+
     int count = 0;
     char dir[1024], str[1024];
     struct dirent **namelist;
@@ -135,6 +154,8 @@ int main(int argc, char *argv[]) {
     memset(&file->flag, 0, count);
     memset(&file->rec, 0, count);
     // 排序进程
-    quickSort(file, 0, count - 1);
+    if (flag2 == 1)
+        quickSort(file, 0, count - 1);
     print_pstree(file, count, 0 , 0);
+    return 0;
 }
