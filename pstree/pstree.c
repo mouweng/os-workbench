@@ -135,6 +135,6 @@ int main(int argc, char *argv[]) {
     memset(&file->flag, 0, count);
     memset(&file->rec, 0, count);
     // 排序进程
-    // quickSort(file, 0, count - 1);
+    quickSort(file, 0, count - 1);
     print_pstree(file, count, 0 , 0);
 }
