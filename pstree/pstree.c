@@ -105,7 +105,7 @@ int main(int argc, char *argv[]) {
                     for (k = j; k < strlen(str); k ++) {
                         name[k - j] = str[k];
                     }
-                    name[k - j + 1] = '\0';
+                    name[k - j - 1] = '\0';
                 }
                 file[t].pid = pid;
                 file[t].ppid = ppid;
