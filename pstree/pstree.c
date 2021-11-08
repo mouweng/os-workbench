@@ -12,7 +12,7 @@ char default_path[1024] = "/proc/";
 
 int main(int argc, char *argv[]) {
     int count = 0;
-    char dir[1024];
+    char dir[1024], str[1024];
     struct dirent **namelist;
     strcpy(dir, default_path);
     int total = scandir(dir, &namelist, 0, alphasort); //查看所有文件的个数
