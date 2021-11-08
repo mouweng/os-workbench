@@ -92,12 +92,11 @@ void quickSort(info *file, int l, int r) {
 
 int main(int argc, char *argv[]) {
     for (int i = 0; i < argc; i++) {
-        assert(argv[i]); // C 标准保证
         if (strcmp(argv[i], "-p") == 0 || strcmp(argv[i], "--show-pids") == 0) flag1 = 1;
         if (strcmp(argv[i], "-n") == 0 || strcmp(argv[i], "--numeric-sort") == 0) flag2 = 1;
         if (strcmp(argv[i], "-V") == 0 || strcmp(argv[i], "--version") == 0) flag3 = 1;
     }
-    
+
     if (flag3 == 1) {
         printf("Version 1.1");
         return 0;
