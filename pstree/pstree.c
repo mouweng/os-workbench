@@ -118,8 +118,23 @@ int main(int argc, char *argv[]) {
     }
     memset(&file->flag, 0, count);
     memset(&file->rec, 0, count);
-    // for (int i = 0; i < count; i ++) {
-    //     printf("pid : %d | ppid :%d | name : %s | flag : %d | rec : %d\n", file[i].pid, file[i].ppid, file[i].name, file[i].flag, file[i].rec);
-    // }
+    // 排序进程
+    quickSort(file, 0, count - 1);
     print_pstree(file, count, 0 , 0);
+}
+
+void quickSort(info *file, int l, int r) {
+    if (l >= r) return;
+    int q = file[l].pid;
+    int temp = file[l];
+    int i = l, j = r;
+    while (i < j) {
+        while (i < j && file[j].pid >= q) j --;
+        file[i] = file[j];
+        while (i < j && file[i].pid <= q) i ++;
+        file[j] =file[i];
+    }
+    file[i] = temp;
+    quickSort(file, l, i - 1);
+    quickSort(file, i + 1, r);
 }
