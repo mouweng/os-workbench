@@ -203,14 +203,6 @@ int my_getppid(char *str){
         ret=0;
     return ret;
 }
-int child_exist(info *file,int count,int ppid){
-    int i;
-    for(i=0;i<count;i++){
-        if(file[i].flag==0&&file[i].ppid==ppid)
-            return 1;
-        }
-    return 0;
-}
 void print_pstree(info *file,int count,int ppid,int rec){
     int i,j,k;
     for(i=0;i<count;i++){
