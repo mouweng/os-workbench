@@ -97,7 +97,7 @@ int main(int argc, char *argv[]) {
         else if (strcmp(argv[i], "-n") == 0 || strcmp(argv[i], "--numeric-sort") == 0) flag2 = 1;
         else if (strcmp(argv[i], "-V") == 0 || strcmp(argv[i], "--version") == 0) flag3 = 1;
         else {
-            printf("Argument Error!");
+            printf("Argument Error!\n");
             return 0;
         }
     }
