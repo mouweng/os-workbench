@@ -7,8 +7,6 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <dirent.h>
-#include <iostream>
-#include <vector>
 
 char default_path[1024] = "/proc/";
 
@@ -16,15 +14,17 @@ typedef struct file_info{
     int pid;
     int ppid;
     char name[1024];
+    int flag;
+    int rec;
 } info;
 
 
 
-int my_getpid(char *str) {
+int getpid(char *str, char * type) {
     int len = strlen(str);
     char num[10];
     int i, j, ret;
-    if (strncmp(str, "Pid", 3) == 0) {
+    if (strncmp(str, type, 3) == 0) {
         for (i = 0; i < len; i ++) {
             if (str[i] >= '0' && str[i] <= '9') break;
         }
@@ -38,22 +38,19 @@ int my_getpid(char *str) {
     return ret;
 }
 
-int my_getppid(char *str) {
-    int len = strlen(str);
-    char num[10];
-    int i, j, ret;
-    if (strncmp(str, "PPid", 3) == 0) {
-        for (i = 0; i < len; i ++) {
-            if (str[i] >= '0' && str[i] <= '9') break;
+void print_pstree(info *file,int count,int ppid,int rec){
+    int i,j,k;
+    for(i=0;i<count;i++){
+        if(file[i].flag==0&&file[i].ppid==ppid)
+        {
+            file[i].rec=rec+1;
+            file[i].flag=1;
+            for(k=0;k<rec;k++)
+                printf("      ");
+            printf("[%d]%s\n",file[i].pid,file[i].name);
+            print_pstree(file,count,file[i].pid,file[i].rec);
         }
-        for (j = 0; j < len - i; j ++) {
-            num[j] = str[i + j];
-        }
-        ret = atoi(num);
-    } else {
-        ret = 0;
     }
-    return ret;
 }
 
 int main(int argc, char *argv[]) {
@@ -83,8 +80,8 @@ int main(int argc, char *argv[]) {
             fp = fopen(path, "r");
             while (!feof(fp)) {
                 fgets(str, 1024, fp);
-                if ((s1 = my_getpid(str)) != 0) pid = s1;
-                if ((s2 = my_getppid(str)) != 0) ppid = s2;
+                if ((s1 = getpid(str, "pid")) != 0) pid = s1;
+                if ((s2 = getpid(str, "ppid")) != 0) ppid = s2;
                 if (strncmp(str, "Name", 4) == 0) {
                     for (j = 4; j < strlen(str); j ++) {
                         if (str[j] >= 'a' && str[j] <= 'z') break;
@@ -103,5 +100,7 @@ int main(int argc, char *argv[]) {
         }
         i ++;
     }
-    print_pstree(file, count, 0 , 0);
+    memset(&file->flag,0,count);
+    memset(&file->rec,0,count);
+    print_pstree(file,count,0,0);
 }
