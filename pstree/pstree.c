@@ -78,7 +78,6 @@ int main(int argc, char *argv[]) {
     printf("path=%s, total = %d\n", dir, total);
     for (int i = 0; i < total; i ++) {
         strcpy(str, namelist[i]->d_name);
-        printf("%s\n", str);
         if (str[0] >= '0' && str[0] <= '9') count ++; // 统计进程的个数（字符开头为数字的是进程文件夹）
     }
     printf("进程数：%d\n", count);
