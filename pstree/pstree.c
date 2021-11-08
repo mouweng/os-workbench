@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
     while (i < total) {
         FILE * fp;
         char path[1024], name[1024];
-        int pid, ppid;
+        int pid = 0, ppid = 0;
         strcpy(str, namelist[i]->d_name);
         strcpy(path, default_path);
         if (str[0] >= '0' && str[0] <= '9') { // 判断是进程文件
