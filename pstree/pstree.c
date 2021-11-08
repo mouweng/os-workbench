@@ -15,6 +15,6 @@ int main(int argc, char *argv[]) {
     struct dirent **namelist;
     strcpy(dir, default_path);
     int total = scandir(dir, &namelist, 0, alphasort);
-    printf("%d", namelist);
+    printf(namelist);
     printf("path=%s, total = %d\n", dir, total);
 }
