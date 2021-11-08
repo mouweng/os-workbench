@@ -121,5 +121,5 @@ int main(int argc, char *argv[]) {
     for (int i = 0; i < count; i ++) {
         printf("pid : %d | ppid :%d | name : %s | flag : %d | rec : %d\n", file[i].pid, file[i].ppid, file[i].name, file[i].flag, file[i].rec);
     }
-    // print_pstree(file, count, 0 , 0);
+    print_pstree(file, count, 0 , 0);
 }
