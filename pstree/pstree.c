@@ -11,7 +11,6 @@
 char default_path[1024] = "/proc/";
 int flag1 = 0, flag2 = 0, flag3 = 0;
 
-
 typedef struct file_info{
     int pid;
     int ppid;
@@ -103,7 +102,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (flag3 == 1) {
-        printf("Version 1.1\n");
+        printf("Version 1.0\n");
         return 0;
     }
 
