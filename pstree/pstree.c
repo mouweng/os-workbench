@@ -96,7 +96,6 @@ int main(int argc, char *argv[]) {
             fp = fopen(path, "r");
             while (!feof(fp)) {
                 fgets(str, 1024, fp);
-                printf("%s\n", str);
                 if ((s1 = my_getpid(str)) != 0) pid = s1;
                 if ((s2 = my_getppid(str)) != 0) ppid = s2;
                 if (strncmp(str, "Name", 4) == 0) {
