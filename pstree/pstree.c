@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (flag3 == 1) {
-        printf("Version 1.1");
+        printf("Version 1.1\n");
         return 0;
     }
 
