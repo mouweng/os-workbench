@@ -1,6 +1,12 @@
 #include <stdio.h>
-#include <assert.h>
+#include <stdlib.h>
+#include <errno.h>
 #include <string.h>
+#include <netdb.h>
+#include <sys/types.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <dirent.h>
 
 char default_path[1024] = "/proc/";
 
