@@ -158,7 +158,6 @@
 #include <unistd.h>
 #include <dirent.h>
 char default_path[1024]="/proc/";
-int s=0;
 typedef struct file_info
 {
     int pid;
