@@ -18,39 +18,39 @@ typedef struct file_info{
     int rec;
 } info;
 
-int my_getpid(char *str) {
-    int len = strlen(str);
+int my_getpid(char *str){
+    int len=strlen(str);
     char num[10];
-    int i, j, ret;
-    if (strncmp(str, "Pid", 3) == 0) {
-        for (i = 0; i < len; i ++) {
-            if (str[i] >= '0' && str[i] <= '9') break;
+    int i,j,ret;
+    if(strncmp(str,"Pid",3)==0){
+        for(i=0;i<len;i++){
+            if(str[i]>='0'&&str[i]<='9')
+                break;
         }
-        for (j = 0; j < len - i; j ++) {
-            num[j] = str[i + j];
+        for(j=0;j<len-i;j++){
+            num[j]=str[i+j];
         }
-        ret = atoi(num);
-    } else {
-        ret = 0;
-    }
+        ret=atoi(num);
+    }else
+        ret=0;
     return ret;
 }
-
-int my_getppid(char *str) {
-    int len = strlen(str);
+int my_getppid(char *str){
+    int len=strlen(str);
     char num[10];
-    int i, j, ret;
-    if (strncmp(str, "PPid", 3) == 0) {
-        for (i = 0; i < len; i ++) {
-            if (str[i] >= '0' && str[i] <= '9') break;
+    int i,j,ret;
+    if(strncmp(str,"PPid",4)==0){
+        for(i=0;i<len;i++){
+            if(str[i]>='0'&&str[i]<='9')
+                break;
         }
-        for (j = 0; j < len - i; j ++) {
-            num[j] = str[i + j];
+        for(j=0;j<len-i;j++){
+            num[j]=str[i+j];
         }
-        ret = atoi(num);
-    } else {
-        ret = 0;
-    }
+        ret=atoi(num);
+        }
+    else
+        ret=0;
     return ret;
 }
 
