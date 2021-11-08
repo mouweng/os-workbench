@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
     }
     printf("进程数：%d\n", count);
     
-    info flie[1024];
+    info file[1024];
     int i = 0, t = 0, s1, s2, j, k;
     while (i < total) {
         FILE * fp;
