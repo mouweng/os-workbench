@@ -7,6 +7,8 @@
 #include <pthread.h>
 #include <unistd.h>
 #include <dirent.h>
+#include <iostream>
+#include <vector>
 
 char default_path[1024] = "/proc/";
 
@@ -14,9 +16,9 @@ typedef struct file_info{
     int pid;
     int ppid;
     char name[1024];
-    int flag;
-    int rec;
 } info;
+
+
 
 int my_getpid(char *str) {
     int len = strlen(str);
@@ -52,21 +54,6 @@ int my_getppid(char *str) {
         ret = 0;
     }
     return ret;
-}
-
-void print_pstree(info *file,int count,int ppid,int rec){
-    int i,j,k;
-    for(i=0;i<count;i++){
-        if(file[i].flag==0&&file[i].ppid==ppid)
-        {
-            file[i].rec=rec+1;
-            file[i].flag=1;
-            for(k=0;k<rec;k++)
-                printf("      ");
-            printf("[%d]%s\n",file[i].pid,file[i].name);
-            print_pstree(file,count,file[i].pid,file[i].rec);
-        }
-    }
 }
 
 int main(int argc, char *argv[]) {
@@ -115,11 +102,6 @@ int main(int argc, char *argv[]) {
             t ++;
         }
         i ++;
-    }
-    memset(&file->flag, 0, count);
-    memset(&file->rec, 0, count);
-    for (int i = 0; i < count; i ++) {
-        printf("pid : %d | ppid :%d | name : %s | flag : %d | rec : %d\n", file[i].pid, file[i].ppid, file[i].name, file[i].flag, file[i].rec);
     }
     print_pstree(file, count, 0 , 0);
 }
