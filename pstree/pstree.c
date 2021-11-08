@@ -69,6 +69,22 @@ void print_pstree(info *file,int count,int ppid,int rec){
     }
 }
 
+void quickSort(info *file, int l, int r) {
+    if (l >= r) return;
+    int q = file[l].pid;
+    info *temp = file[l];
+    int i = l, j = r;
+    while (i < j) {
+        while (i < j && file[j].pid >= q) j --;
+        file[i] = file[j];
+        while (i < j && file[i].pid <= q) i ++;
+        file[j] =file[i];
+    }
+    file[i] = temp;
+    quickSort(file, l, i - 1);
+    quickSort(file, i + 1, r);
+}
+
 int main(int argc, char *argv[]) {
     int count = 0;
     char dir[1024], str[1024];
@@ -121,20 +137,4 @@ int main(int argc, char *argv[]) {
     // 排序进程
     quickSort(file, 0, count - 1);
     print_pstree(file, count, 0 , 0);
-}
-
-void quickSort(info *file, int l, int r) {
-    if (l >= r) return;
-    int q = file[l].pid;
-    info *temp = file[l];
-    int i = l, j = r;
-    while (i < j) {
-        while (i < j && file[j].pid >= q) j --;
-        file[i] = file[j];
-        while (i < j && file[i].pid <= q) i ++;
-        file[j] =file[i];
-    }
-    file[i] = temp;
-    quickSort(file, l, i - 1);
-    quickSort(file, i + 1, r);
 }
