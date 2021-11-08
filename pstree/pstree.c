@@ -18,13 +18,29 @@ typedef struct file_info{
     int rec;
 } info;
 
-
-
-int my_getpid(char *str, char * type) {
+int my_getpid(char *str) {
     int len = strlen(str);
     char num[10];
     int i, j, ret;
-    if (strncmp(str, type, 3) == 0) {
+    if (strncmp(str, "Pid", 3) == 0) {
+        for (i = 0; i < len; i ++) {
+            if (str[i] >= '0' && str[i] <= '9') break;
+        }
+        for (j = 0; j < len - i; j ++) {
+            num[j] = str[i + j];
+        }
+        ret = atoi(num);
+    } else {
+        ret = 0;
+    }
+    return ret;
+}
+
+int my_getppid(char *str) {
+    int len = strlen(str);
+    char num[10];
+    int i, j, ret;
+    if (strncmp(str, "PPid", 3) == 0) {
         for (i = 0; i < len; i ++) {
             if (str[i] >= '0' && str[i] <= '9') break;
         }
@@ -80,8 +96,8 @@ int main(int argc, char *argv[]) {
             fp = fopen(path, "r");
             while (!feof(fp)) {
                 fgets(str, 1024, fp);
-                if ((s1 = my_getpid(str, "pid")) != 0) pid = s1;
-                if ((s2 = my_getpid(str, "ppid")) != 0) ppid = s2;
+                if ((s1 = my_getpid(str)) != 0) pid = s1;
+                if ((s2 = my_getppid(str)) != 0) ppid = s2;
                 if (strncmp(str, "Name", 4) == 0) {
                     for (j = 4; j < strlen(str); j ++) {
                         if (str[j] >= 'a' && str[j] <= 'z') break;
@@ -100,7 +116,10 @@ int main(int argc, char *argv[]) {
         }
         i ++;
     }
-    memset(&file->flag,0,count);
-    memset(&file->rec,0,count);
-    print_pstree(file,count,0,0);
+    memset(&file->flag, 0, count);
+    memset(&file->rec, 0, count);
+    // for (int i = 0; i < count; i ++) {
+    //     printf("pid : %d | ppid :%d | name : %s | flag : %d | rec : %d\n", file[i].pid, file[i].ppid, file[i].name, file[i].flag, file[i].rec);
+    // }
+    print_pstree(file, count, 0 , 0);
 }
