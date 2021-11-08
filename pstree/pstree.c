@@ -126,7 +126,7 @@ int main(int argc, char *argv[]) {
 void quickSort(info *file, int l, int r) {
     if (l >= r) return;
     int q = file[l].pid;
-    int temp = file[l];
+    info* temp = file[l];
     int i = l, j = r;
     while (i < j) {
         while (i < j && file[j].pid >= q) j --;
