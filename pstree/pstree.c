@@ -20,7 +20,7 @@ typedef struct file_info{
 
 
 
-int getpid(char *str, char * type) {
+int my_getpid(char *str, char * type) {
     int len = strlen(str);
     char num[10];
     int i, j, ret;
@@ -80,8 +80,8 @@ int main(int argc, char *argv[]) {
             fp = fopen(path, "r");
             while (!feof(fp)) {
                 fgets(str, 1024, fp);
-                if ((s1 = getpid(str, "pid")) != 0) pid = s1;
-                if ((s2 = getpid(str, "ppid")) != 0) ppid = s2;
+                if ((s1 = my_getpid(str, "pid")) != 0) pid = s1;
+                if ((s2 = my_getpid(str, "ppid")) != 0) ppid = s2;
                 if (strncmp(str, "Name", 4) == 0) {
                     for (j = 4; j < strlen(str); j ++) {
                         if (str[j] >= 'a' && str[j] <= 'z') break;
