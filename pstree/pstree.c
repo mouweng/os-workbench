@@ -118,5 +118,8 @@ int main(int argc, char *argv[]) {
     }
     memset(&file->flag, 0, count);
     memset(&file->rec, 0, count);
+    for (int i = 0; i < count; i ++) {
+        printf("%d %d %s %d, %d", file[i].pid, file[i].ppid, file[i].name, file[i].flag, file[i].rec);
+    }
     // print_pstree(file, count, 0 , 0);
 }
