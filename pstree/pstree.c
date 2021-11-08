@@ -97,8 +97,7 @@ int main(int argc, char *argv[]) {
         if (strcmp(argv[i], "-n") == 0 || strcmp(argv[i], "--numeric-sort") == 0) flag2 = 1;
         if (strcmp(argv[i], "-V") == 0 || strcmp(argv[i], "--version") == 0) flag3 = 1;
     }
-    assert(!argv[argc]); // C 标准保证
-
+    
     if (flag3 == 1) {
         printf("Version 1.1");
         return 0;
